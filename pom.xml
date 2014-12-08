@@ -4,7 +4,7 @@
 
     <groupId>io.federecio</groupId>
     <artifactId>dropwizard-swagger</artifactId>
-    <version>0.5.3-SNAPSHOT</version>
+    <version>0.5.4-SNAPSHOT</version>
 
     <name>Dropwizard Swagger support</name>
     <description>A simple way to document your REST APIs in DropWizard using Swagger</description>
@@ -23,7 +23,11 @@
             <name>Federico Recio</name>
             <url>http://about.me/federecio</url>
         </developer>
-    </developers>
+        <developer>
+            <name>Animesh Kumar</name>
+            <url>http://animesh.org</url>
+        </developer>
+        </developers>
 
     <distributionManagement>
         <snapshotRepository>

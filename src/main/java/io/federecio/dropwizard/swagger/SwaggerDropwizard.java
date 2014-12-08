@@ -59,15 +59,9 @@ public class SwaggerDropwizard {
      */
     public void onRun(Configuration configuration, Environment environment, String host, Integer port) {
         SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, environment);
-
-        String contextPath = swaggerConfiguration.getContextPath();
-        if (contextPath.equals("/") || swaggerConfiguration.isSimpleServer()) {
-            new AssetsBundle("/swagger-static").run(environment);
-        } else {
-            new AssetsBundle("/swagger-static", contextPath + "/swagger-static").run(environment);
-        }
-
-        environment.jersey().register(new SwaggerResource(contextPath));
+        
+        // Animesh - separate it out - so it can be overridden
+        configureAssets(configuration, environment, swaggerConfiguration);
 
         swaggerConfiguration.setUpSwaggerFor(host, port);
 
@@ -76,5 +70,16 @@ public class SwaggerDropwizard {
         environment.jersey().register(new ResourceListingProvider());
         ScannerFactory.setScanner(new DefaultJaxrsScanner());
         ClassReaders.setReader(new DefaultJaxrsApiReader());
+    }
+    
+    public void configureAssets (Configuration configuration, Environment environment, SwaggerConfiguration swaggerConfiguration){
+        String contextPath = swaggerConfiguration.getContextPath();
+        if (contextPath.equals("/") || swaggerConfiguration.isSimpleServer()) {
+            new AssetsBundle("/swagger-static").run(environment);
+        } else {
+            new AssetsBundle("/swagger-static", contextPath + "/swagger-static").run(environment);
+        }
+
+        environment.jersey().register(new SwaggerResource(contextPath));
     }
 }
