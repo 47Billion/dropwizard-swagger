@@ -17,11 +17,12 @@ How to use it
 
 * Add the Maven dependency
 
-	<repository>
-		<id>git-47billion</id>
-		<name>47billion's Git based repo</name>
-		<url>https://github.com/47billion/maven-repo/raw/master/</url>
-	</repository>
+	
+        <repository>
+                <id>git-47billion</id>
+                <name>47billion's Git based repo</name>
+                <url>https://github.com/47billion/maven-repo/raw/master/</url>
+        </repository>
 
         <dependency>
             <groupId>io.federecio</groupId>
