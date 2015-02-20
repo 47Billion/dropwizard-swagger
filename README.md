@@ -15,18 +15,30 @@ http://www.apache.org/licenses/LICENSE-2.0
 How to use it
 -------------
 
-* Add the Maven dependency (__now available in Maven Central!__)
+* Add the Maven dependency
+
+	
+        <repository>
+                <id>git-47billion</id>
+                <name>47billion's Git based repo</name>
+                <url>https://github.com/47billion/maven-repo/raw/master/</url>
+        </repository>
 
         <dependency>
             <groupId>io.federecio</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>0.5.2</version>
+            <version>0.5.4-SNAPSHOT</version>
         </dependency>
 
 
 * In your Application class:
 
-		private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard();
+		private final SwaggerDropwizard swaggerDropwizard = new SwaggerDropwizard(){
+		        public void configureAssets(Configuration configuration, Environment environment,
+                		SwaggerConfiguration swaggerConfiguration) {
+            			// Override asset configuration with _probably_ ConfiguredAssetsBundle
+		        };
+		};
 
 		@Override
 		public void initialize(Bootstrap<TestConfiguration> bootstrap) {
