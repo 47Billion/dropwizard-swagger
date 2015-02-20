@@ -58,12 +58,16 @@ public class SwaggerDropwizard {
      * does not work correctly.
      */
     public void onRun(Configuration configuration, Environment environment, String host, Integer port) {
+        onRun(configuration, environment, host, port, "0.0");
+    }
+    
+    public void onRun(Configuration configuration, Environment environment, String host, Integer port, String apiVersion) {
         SwaggerConfiguration swaggerConfiguration = new SwaggerConfiguration(configuration, environment);
         
         // Animesh - separate it out - so it can be overridden
         configureAssets(configuration, environment, swaggerConfiguration);
 
-        swaggerConfiguration.setUpSwaggerFor(host, port);
+        swaggerConfiguration.setUpSwaggerFor(host, port, apiVersion);
 
         environment.jersey().register(new ApiListingResourceJSON());
         environment.jersey().register(new ApiDeclarationProvider());
@@ -71,6 +75,7 @@ public class SwaggerDropwizard {
         ScannerFactory.setScanner(new DefaultJaxrsScanner());
         ClassReaders.setReader(new DefaultJaxrsApiReader());
     }
+
     
     public void configureAssets (Configuration configuration, Environment environment, SwaggerConfiguration swaggerConfiguration){
         String contextPath = swaggerConfiguration.getContextPath();

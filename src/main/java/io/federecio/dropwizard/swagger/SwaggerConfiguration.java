@@ -55,6 +55,15 @@ public class SwaggerConfiguration {
         ConfigFactory.setConfig(config);
     }
 
+    public void setUpSwaggerFor(String host, Integer port, String apiVersion) {
+        SwaggerConfig config = ConfigFactory.config();
+        String swaggerBasePath = getSwaggerBasePath(host, port);
+        config.setBasePath(swaggerBasePath);
+        config.setApiPath(swaggerBasePath);
+        config.setApiVersion(apiVersion);
+        ConfigFactory.setConfig(config);
+    }
+
     public String getContextPath() {
         String applicationContextPath;
         ServerFactory serverFactory = configuration.getServerFactory();
